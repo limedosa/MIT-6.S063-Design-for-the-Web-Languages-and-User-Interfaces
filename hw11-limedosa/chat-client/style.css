@@ -1,0 +1,585 @@
+body {
+  background: linear-gradient(to right, #7ed957, #85de77);
+  font-family: Arial, sans-serif;
+  animation: background-animation 3s ease-in-out infinite alternate;
+}
+
+/* Outline style for all elements */
+/* * {
+  outline: 1px solid #1f874c;
+} */
+
+/* Animation for the background gradient */
+@keyframes background-animation {
+  0% {
+    background: linear-gradient(to right, #7ed957b0, #85de779f);
+  }
+  50% {
+    background: linear-gradient(to right, #7ed9577b, #85de7784);
+  }
+  100% {
+    background: linear-gradient(to right, #7ed95784, #85de7780);
+  }
+}
+
+.message-actor {
+  font-size: 19px !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-align: center;
+  /* font-weight: bold; */
+  color: #333;
+  /* padding: 10px; */
+  text-transform: capitalize !important;
+  /* border: 1px solid #1804b3 !important; */
+}
+.radio-group {
+  padding: 10px;
+  margin-top: 70px;
+}
+.message-username {
+  font-style: italic;
+  text-transform: lowercase !important;
+  text-align: center;
+  text-decoration: dashed !important;
+  color: white !important;
+  background-color: rgba(14, 91, 224, 0.336);
+}
+.message-content {
+  font-size: 19px !important;
+  text-align: left;
+  /* font-weight: bold; */
+  font-weight: bolder;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #011a80;
+  /* padding: 10%; */
+  text-transform: capitalize !important;
+  /* border: 1px solid #1804b3 !important; */
+}
+.message-actorid {
+  /* text-transform: lowercase !important; */
+  text-align: center;
+  text-decoration: underline;
+  color: rgb(33, 15, 230);
+  font-size: 15px !important;
+}
+.message-date {
+  text-align: right !important;
+  color: #cc1515;
+  font-size: 12px !important;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#message-form input[type="text"] {
+  font-size: 906px; /* adjust the font size as needed */
+}
+
+#message-form input[type="text"]::placeholder {
+  font-size: 56px; /* adjust the font size as needed */
+}
+#like button {
+  font-size: 20px; /* Increase the font size to make the icons larger */
+  float: right; /* Float the button to the right */
+}
+
+#like button:hover {
+  cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+}
+
+form input[type="text"] {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  flex: 1;
+}
+
+form input[type="submit"] {
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  transition: 400ms;
+  cursor: pointer;
+  background-color: #0088cc;
+  color: #fff;
+  /* padding: 0.5rem 1rem; */
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+form input[type="submit"]:hover {
+  background-color: #000599;
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transform: scale(1.09);
+  transition: 400ms;
+  cursor: pointer;
+}
+button.editable {
+  background-color: #00c083b7;
+  border: none;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+button.editable:hover {
+  background-color: #006d4ab7;
+}
+
+.set-username-form .set-username-button {
+  background-color: #00c083b7;
+  border: none;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.set-username-form .set-username-button:hover {
+  background-color: #006d4ab7;
+}
+.login-button {
+  position: fixed;
+  top: 1%;
+  left: 2%;
+  z-index: 9999;
+  background-color: #f83a2d; /* Green */
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  transition: 400ms;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  display: none;
+}
+.app-name {
+  position: fixed;
+  top: -4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  padding: 1px 0;
+  background-color: #fff;
+  z-index: 100;
+  /* bottom: 100px !important;  */
+}
+h3 {
+  color: #086b22;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.nav {
+  /* outline: red dashed 1px; */
+  position: fixed;
+  bottom: 0;
+  width: 69%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 0;
+  background-color: #276a05dc;
+}
+
+.nav label {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 26px !important;
+  color: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 10px !important;
+}
+
+.nav input[type="radio"] {
+  display: none !important;
+}
+
+.nav input[type="radio"]:checked + label {
+  background-color: #fff !important;
+  color: #276a05 !important;
+}
+
+label:hover {
+  background-color: #ddd;
+}
+
+input[type="radio"]:checked + label {
+  color: #fff;
+  background-color: #005a92b7;
+}
+@keyframes jump {
+  to {
+    transform: translateY(-0.4em);
+  }
+}
+
+.login-button:hover {
+  background-color: #9a0e04; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.edit-delete-button {
+  /* position: absolute; */
+  bottom: 0;
+  left: 90% !important;
+}
+.nav-heading {
+  color: #fff !important;
+  font-size: xx-large !important;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 10%;
+}
+
+.send-message-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 2px solid #3498db;
+  border-radius: 20px;
+  background-color: #f7f7f7;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.send-message-button input[type="text"] {
+  flex: 1;
+  margin-right: 10px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ecf0f1;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.send-message-button input[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.send-message-button input[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+/* Style for the chat app container */
+#app {
+  margin-top: 8% !important;
+  margin: 8% auto;
+  max-width: 70%;
+  padding: 10px;
+  background-color: #4c624c72;
+  border-radius: 10px;
+  box-shadow: 0 0 60px rgb(255, 255, 255);
+  word-wrap: break-word;
+}
+@font-face {
+  font-family: "Lobster";
+  src: url("path/to/Lobster.ttf");
+}
+h2 {
+  font-family: "Times New Roman", Times, serif;
+  text-transform: uppercase;
+  font-size: 170% !important;
+  line-height: 1.2;
+  font-size: 94px;
+  text-align: center;
+  color: #539039;
+}
+h1 {
+  /* font-family: "Lobster", Arial, sans-serif;
+   */
+  font-family: "Sigmar One", Impact, "Arial Narrow Bold";
+  text-transform: uppercase;
+  font-size: 300% !important;
+  /* font-size: 40rem; */
+  line-height: 1.2;
+  font-size: 94px;
+  text-align: center;
+  /* margin-bottom: 10px; */
+  color: #7ed957;
+  text-shadow: 60px #315621 !important;
+  border-radius: 4px;
+  -webkit-text-stroke: px #7ed957 !important;
+}
+
+/* Style for the login button */
+button {
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  transition: 400ms;
+  cursor: pointer;
+  background-color: #0b853a;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  /* padding: 12px 25px; */
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #449100;
+  transform: scale(1.09);
+}
+
+/* Style for the chat format radio buttons */
+input[type="radio"] {
+  margin-right: 10px;
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
+  border: none;
+  background-color: #f5f5f5;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 25px;
+}
+
+input[type="submit"] {
+  background-color: #00ffc3;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #0059b3;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  /* align-items: flex-end; */
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 80px;
+  font-size: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  border: 2px solid #eee; /* Adds a light gray border around the list */
+  border-radius: 10px; /* Rounds the corners of the border */
+  font-family: Arial, sans-serif; /* Sets the font for the list */
+  /* padding: 10px; Adds padding to each list item */
+  margin-bottom: 10px; /* Adds margin between each list item */
+  background-color: #dbe7ed91; /* Sets a light gray background color for each list item */
+  border-radius: 5px; /* Rounds the corners of each list item */
+  box-shadow: 1px 6px 2px rgba(12, 49, 159, 0.594); /* Adds a subtle box shadow to each list item */
+}
+label {
+  display: block;
+  font: 1rem "Fira Sans", sans-serif;
+}
+.search {
+  padding-left: 1px;
+  padding: -10%;
+  height: 50px;
+  color: #eee;
+  background: linear-gradient(to bottom right, #3fb12241, #42eea9b1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  width: 20%;
+  overflow: hidden;
+  transition: width 0.5s ease;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.search:hover,
+.search:focus-within {
+  width: 200px;
+}
+
+.search__input,
+.search__btn {
+  color: inherit;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.search__input {
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.676);
+  font-size: 1.2rem; /* Add this line */
+}
+
+.search__btn {
+  width: 35px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+}
+
+.search__input::placeholder {
+  color: inherit;
+}
+
+input,
+label {
+  margin: 0.4rem 0;
+}
+
+li {
+  /* margin-bottom: 10px; */
+  /* border: 4px solid rgb(0, 0, 0); */
+  padding: 7px;
+  margin-bottom: 10px;
+}
+
+/* Style for the message properties */
+li:not(:first-child) {
+  font-size: 15px;
+}
+.username {
+  font-weight: bold;
+  font-size: 20px;
+  color: #333;
+}
+
+/* Style for the delete and edit buttons */
+li button {
+  font-size: 14px;
+  color: #fff;
+  background-color: #206b15aa;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+li:hover .popup-id {
+  transform: scale(0.7);
+}
+
+.popup-id {
+  max-width: 70%;
+  transition-duration: 200ms;
+  transform-origin: -2em, -8em;
+  position: absolute;
+  background: rgba(119, 191, 121, 0.625);
+  border: 1px solid hsla(120, 10%, 90%, 0.662);
+  padding: 0.8em 1em;
+  border-radius: 0.2em;
+  margin-top: 0.3em;
+  filter: drop-shadow(0 0 0.5em hsl(220 10% 50% / 0.3));
+  transform: scale(0);
+  transform-origin: bottom left;
+}
+
+.popup-id::before {
+  content: "";
+  position: absolute;
+  left: 1.5em;
+  bottom: 100%;
+  aspect-ratio: 5 / 1;
+  height: 0.4em;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  background: inherit;
+}
+
+.dm-user {
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}

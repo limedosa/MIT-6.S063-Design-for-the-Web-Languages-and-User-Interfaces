@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script type="module" src="./chat.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body :class="{ dark: lightTheme }">
+  <div id="app">
+    <h1 class="app-name">
+      AllChat
+    </h1>
+
+    <!-- Begin problem 3 solution -->
+    <h3>
+      {{myUsername}}
+    </h3>
+
+
+
+    <!-- find people button -->
+    <!-- <br>
+    <span>{{findPeople}}</span>
+    <label for="site-search">Search People:</label>
+    <input type="search" id="site-search" name="q" v-model="findPeople">
+    <button>Search For People</button> -->
+    <p>
+      <button class="login-button" @click="$gf.toggleLogIn">
+        <!-- If we have a user ID, we're logged in so show "Log Out" -->
+        <!-- Otherwise, show "Log In" -->
+        {{ $gf.me? 'Log Out' : 'Log In' }}
+      </button>
+    </p>
+
+    <!-- If we're not logged in, hide everything except the login button -->
+
+
+    <p class="nav">
+      <input type="radio" id="channel" value="nav-updates" value="updates" v-model="pick" name="navigator" />
+      <label for="channel">⋃</label>
+
+      <input type="radio" id="pm" value="nav-private" v-model="pick" name="navigator" />
+      <label for="pm">✉</label>
+      <!-- ✉ -->
+
+      <input type="radio" id="search" value="nav-search" v-model="pick" name="navigator" />
+      <label for="search" style="margin-right: 10px;">🔍</label>
+
+      <input type="radio" id="settings" value="nav-settings" v-model="pick" name="navigator" />
+      <label for="settings" style="margin-right: 10px;">⚙</label>
+
+      <input type="radio" id="video" value="nav-video" v-model="pick" name="navigator" />
+      <label for="video" style="margin-right: 10px;">📹</label>
+    </p>
+
+    <!-- VIDEO CHAT -->
+    <template v-if="pick==='nav-video'">
+      <h2 class="nav-heading"> video Chat</h2>
+      <h1>UNDER CONSTRUCTION</h1>
+    </template>
+
+    <!-- UPDATES -->
+    <!-- UPDATES -->
+    <!-- UPDATES -->
+    <template v-if="pick==='nav-updates'">
+      <h2 class="nav-heading">Updates</h2>
+
+      <!-- Begin chat interface -->
+      <div class="chat-interface">
+        <div class="chat-header">
+          <h3>Chat</h3>
+          <button @click="toggleChat">X</button>
+        </div>
+        <div class="chat-messages" ref="chatMessages">
+          <div class="message" v-for="message in messages" :key="message.id">
+            <span class="message-username">{{ actorsToUsernames[message.actor] }}:</span>
+            <span class="message-content">{{ message.content }}</span>
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" v-model="chatInput" @keyup.enter="sendMessage" placeholder="Type a message...">
+          <button @click="sendMessage">Send</button>
+        </div>
+      </div>
+      <!-- End chat interface -->
+
+      <form class="search">
+        <input type="text" placeholder="🔎" class="search__input" v-model="searchQuery">
+        <button type="button" class="search__btn"><i class="ri-search-2-line"></i></button>
+      </form>
+
+      <form @submit.prevent="sendMessage">
+        <input v-model="messageText" placeholder="Type a message..." />
+        <input type="file" accept="image/*" @change="onImageAttachment" />
+        <input type="submit" value="Send" />
+      </form>
+      <ul>
+        <!-- List all the messages -->
+        <li v-for="message of messages" :key="message.id">
+
+          <!-- Display and edit form if we're editing a message -->
+          <form v-if="editID==message.id" @submit.prevent="saveEditMessage(message)">
+            <input v-model="editText">
+            <input type="submit" value="Save" />
+          </form>
+
+          <!-- Otherwise, display a bunch of properties from the message -->
+          <ul v-else>
+            <li class="message-username">
+              {{ actorsToUsernames[message.actor] }}
+            </li>
+            <li class="message-actor">
+              <name :actor="message.actor"></name>
+            </li>
+            <li class="message-content">
+              {{ message.content }}
+            </li>
+            <li class="message-image">
+              <input type="file" accept="image/*" />
+            </li>
+            <li>
+              <read :messageid="message.id"></read>
+            </li>
+
+            <li class="message-actorid">
+              {{ message.actor }}
+            </li>
+            <li v-if="message.attachment && message.attachment.magnet">
+              <magnet-img :src="message.attachment.magnet"></magnet-img>
+            </li>
+            <!-- <li>&#128153</li> -->
+
+            <li class="message-date">
+              Published: {{ message.published }}
+            </li>
+            <li class="message-date">
+              Last Edited: {{ message.updated }}
+            </li>
+
+
+
+
+            <!-- Only add these controls if the message is ours -->
+            <!-- You can't edit or delete other people's messages -->
+            <template v-if="message.actor==$gf.me">
+              <li class="edit-delete-button">
+                <button @click="removeMessage(message)">
+                  Delete Message
+                </button>
+              </li>
+              <li>
+
+                class="edit-delete-button">
+                <button @click="editMessage(message)">
+                  Edit Message
+                </button>
+              </li>
+            </template>
+          </ul>
+        </li>
+      </ul>
+    </template>
+
+    <!-- SEARCH -->
+    <template v-if="pick==='nav-search'">
+      <h2 class="nav-heading">Search</h2>
+      <!-- <label for="site-search">Search the site:</label>
+      <input type="search" id="site-search" name="q" v-model="searchQuery">
+      <button>Search</button> -->
+      <form class="search">
+        <input type="text" placeholder="🔎" class="search__input" v-model="searchQuery">
+        <button type="button" class="search__btn"><i class="ri-search-2-line"></i></button>
+      </form>
+      <!-- TODO: work on this to make it show the messages or people when searched -->
+
+    </template>
+
+
+
+    <template v-if="pick === 'nav-settings'">
+      <p>
+      <form @submit.prevent="setUsername">
+        <input v-model="preferredUsername" placeholder="Choose a username..." />
+        <input type="submit" value="Set Username" />
+      </form>
+      {{ usernameResult }}
+      </p>
+
+      <!-- Profile Picture -->
+      <div>
+        <h3>Profile Picture:</h3>
+        <div v-if="!editProfilePicture">
+          <img v-if="imageUrl" :src="imageUrl" alt="Profile picture" />
+          <div v-else>No profile picture uploaded.</div>
+          <button @click="editProfilePicture">Edit</button>
+        </div>
+
+        <div v-else>
+          <input type="file" @change="handleFileUpload" />
+          <img v-if="imageUrl" :src="imageUrl" alt="Preview" />
+          <button @click="saveProfilePicture">Save</button>
+          <button @click="editProfilePicture">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Name -->
+      <h3>Name: {{name}}</h3>
+      <name :actor="$gf.me" :editable="true"></name>
+
+      <h1>{{myUsername}}</h1>
+    </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <p v-if="pick==='nav-private'"> -->
+
+
+    <!-- Begin problem 2 solution -->
+    <!-- DIRECT MESSAGES -->
+    <template v-if="pick==='nav-private'">
+      <!-- private chat -->
+      <!-- <h2 class="nav-heading">Private Messages</h2> -->
+      <!-- Begin problem 2 solution -->
+      <h3>Send Message</h3>
+
+      <div v-else>
+        <h2 class="nav-heading">Private Messages</h2>
+        <div v-else>
+          <form @submit.prevent="chatWithUser">
+            <label for="recipient">
+              Chat with:
+            </label>
+            <input id="recipient" v-model="recipientUsernameSearch" />
+            <input type="submit" value="Search" />
+          </form>
+          <span v-if="recipient">
+            Chatting with {{ recipientUsername }}
+          </span>
+          <!-- <span v-else>
+            Username {{ recipientUsername }} does not exist!
+          </span> -->
+          <form @submit.prevent="sendMessage">
+            <input v-model="messageText" placeholder="Type a message..." />
+            <input type="file" accept="image/*" @change="onImageAttachment" />
+            <input type="submit" value="Send" />
+          </form>
+        </div>
+
+      </div>
+
+    </template>
+  </div>
+  <!-- End problem 2 solution -->
+
+
+  <template id="name">
+    <span v-if="!editing">
+
+      <!-- If we're not editing the name-->
+      <!-- Display the profile's name, if it exists -->
+      <!-- or anonymous if it doesn't -->
+      {{ profile? profile.name : 'Anonymous' }}
+
+      <!-- Also if the name is "editable" add an edit button -->
+      <button v-if="editable" @click="editName">
+        Edit Name
+      </button>
+    </span>
+
+    <!-- If we're in the editing state, create something to edit the name-->
+    <form v-else @submit.prevent="saveName">
+      <input v-model="editText" />
+      <input type="submit" value="Save Name" />
+    </form>
+  </template>
+
+
+  <template id="like">
+    <button @click="toggleLike" style="font-size: 28px; float: right;">
+      {{ myLikes.length? '💔' : '💚' }}
+    </button>
+    {{ numLikes }}💙
+  </template>
+
+  <template id="read">
+    <button @click="toggleRead"
+      style="font-size: 10px; float: center-top; background-color:rgba(22, 103, 53, 0.287); color:blue">
+      {{ myReads.length? 'Mark Un-read' : 'Mark Read' }}
+    </button>
+    {{ numReads }} Read
+  </template>
+  <template id="read-receipts">
+    Read By:
+    <span v-for="actor in readActors">
+      <name :actor="actor"></name>
+    </span>
+  </template>
+  <template id="profile-picture">
+    <magnet-img :src="profile?profile.icon.magnet:anonymous"></magnet-img>
+
+    <form v-if="editable" @submit.prevent="savePicture">
+      Choose a profile Picture:
+      <input type="file" accept="image/*" @change="onPicture" />
+      <input type="submit" value="Save" />
+    </form>
+  </template>
+
+  <template id="replies">
+    <form @submit.prevent="postReply">
+      <input v-model="content" />
+      <input type="submit" value="Reply" />
+    </form>
+    <ul>
+      <li v-for="reply in replies" :key="reply.id">
+        <name :actor="reply.actor"></name>:
+        {{ reply.content }}
+      </li>
+    </ul>
+  </template>
+
+
+  <!-- <template id="pfp">
+    <div class="profile-picture-container">
+      <div class="profile-picture" v-if="imageUrl">
+        <img :src="imageUrl" />
+      </div>
+      <div class="profile-picture" v-else>
+        <div class="no-profile-picture"></div>
+      </div>
+      <div class="profile-picture-actions" v-if="editable">
+        <div class="file-input-container">
+          <input type="file" @change="handleFileUpload" />
+          <button class="file-input-button">
+            <i class="fas fa-camera"></i>
+            <span>Upload Photo</span>
+          </button>
+        </div>
+        <div class="profile-picture-buttons">
+          <button class="edit-button" v-if="!editing" @click="editProfilePicture">
+            <i class="fas fa-edit"></i>
+            <span>Edit</span>
+          </button>
+          <button class="save-button" v-if="editing" @click="saveProfilePicture">
+            <i class="fas fa-check"></i>
+            <span>Save</span>
+          </button>
+          <button class="cancel-button" v-if="editing" @click="editing = false">
+            <i class="fas fa-times"></i>
+            <span>Cancel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </template> -->
+
+
+
+
+
+
+
+
+</body>
+<!-- v-if or -->
+
+</html>

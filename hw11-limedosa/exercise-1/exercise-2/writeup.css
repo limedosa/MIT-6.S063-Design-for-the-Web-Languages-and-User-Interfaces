@@ -1,0 +1,106 @@
+/* css for all of your write ups here */
+/* css for all of your write ups here */
+/* CSS for Exercise 1 */
+
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    background-image: -o-linear-gradient(red, green, blue) !important;
+  }
+  
+  header {
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  section {
+    margin: 20px 0;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+  
+  em {
+    font-style: italic;
+  }
+  
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  video {
+    display: block;
+    margin: 20px 0;
+    max-width: 100%;
+  }
+  
+  /* Search bar animation */
+  #search-bar {
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    height: 40px;
+    padding: 5px 10px;
+    position: relative;
+    width: 200px;
+  }
+  
+  #search-bar input[type="text"] {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  #search-bar input[type="text"]:focus + label {
+    transform: translateY(-40px);
+  }
+  
+  #search-bar label {
+    background-color: #fff;
+    font-size: 12px;
+    left: 10px;
+    padding: 0 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Message ID pop-up */
+  .message-id {
+    position: relative;
+  }
+  
+  .message-id:hover .message-id-popup {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .message-id-popup {
+    background-color: #333;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    left: 50%;
+    opacity: 0;
+    padding: 5px;
+    position: absolute;
+    top: -20px;
+    transform: translateX(-50%);
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    visibility: hidden;
+  }
+  
